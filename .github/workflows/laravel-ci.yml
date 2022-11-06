@@ -32,3 +32,5 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+    - name: Block Fixup Commit Merge
+      uses: 13rac1/block-fixup-merge-action@v2.0.0
