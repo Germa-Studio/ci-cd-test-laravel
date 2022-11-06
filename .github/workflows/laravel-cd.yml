@@ -16,11 +16,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: |
-          cd /var/www/germa/ci-cd-test-laravel
-          git pull origin master
-          composer update && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-          php artisan key:generate
-          chmod -R 777 storage bootstrap/cache
-          php artisan migrate:fresh --force
-          php artisan optimize
+        script: ./germa/ci-cd-test-laravel/script.sh
