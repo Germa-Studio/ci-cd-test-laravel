@@ -16,6 +16,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: |
-          cd /germa/ci-cd-test-laravel
-          bash script.sh
+        script: 'cd /germa/ci-cd-test-laravel && bash script.sh'
