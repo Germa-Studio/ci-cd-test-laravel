@@ -1,0 +1,26 @@
+name: Laravel CD
+on:
+  push:
+    branches: 
+      - master
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /var/www/germa/ci-cd-test-laravel
+          git pull origin master
+          composer update && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+          php artisan key:generate
+          chmod -R 777 storage bootstrap/cache
+          php artisan migrate:fresh --force
+          php artisan optimize
