@@ -13,7 +13,7 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
-        port: 22
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.PRIVATE_KEY }}
-        script: 'cd /germa/ci-cd-test-laravel && bash script.sh'
+        port: ${{ secrets.PORT }}
+        script: whoami
