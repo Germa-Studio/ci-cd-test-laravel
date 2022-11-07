@@ -1,32 +1,18 @@
 name: Laravel CD
-on: 
-  push: 
-    branches:
+on:
+  push:
+    branches: 
       - master
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-    
-    - name: Install SSH key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        known_hosts: unnecessary
-    
-    - name: Adding Known Hosts
-      run: ssh-keyscan -p ${{ secrets.SSH_PORT}} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-    
-    - name: Deploy with rsync
-      run: rsync -avz -e "ssh -p ${{ secrets.SSH_PORT }}" ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/germa/ci-cd-test-laravel/
-    
-    - name: Connect to server
+    - name: Executing remote command
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
-        script: |
-          cd /var/www/germa/ci-cd-test-laravel
-          ls -a
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: ls
