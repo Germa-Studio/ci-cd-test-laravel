@@ -1,19 +1,7 @@
 name: Laravel CD
-on:
-  push:
-    branches: 
-      - master
+on: [push]
 jobs:
-
-  build:
-    name: Build
+  write-to-console:
     runs-on: ubuntu-latest
     steps:
-      - name: ls -a via ssh
-        uses: garygrossgarten/github-action-ssh@release
-        with:
-          command: ls -a
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          privateKey: ${{ secrets.PRIVATE_KEY}}
+      - run: echo 'Hello world!'
