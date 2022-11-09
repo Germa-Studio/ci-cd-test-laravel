@@ -17,8 +17,9 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         port: ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script_stop: true
         envs: DIR
         script: | 
+          echo $DIR_LARAVEL
           cd $DIR_LARAVEL
-          chmod +x script.sh
           ./script.sh
