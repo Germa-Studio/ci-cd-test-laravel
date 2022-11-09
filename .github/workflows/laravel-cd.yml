@@ -10,16 +10,13 @@ jobs:
     steps:
     - name: Executing remote command
       uses: appleboy/ssh-action@master
-      env:
-        DIR_LARAVEL: ${{ secrets.SSH_DIR }}
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         port: ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script_stop: true
-        envs: DIR
         script: | 
-          echo $DIR_LARAVEL
-          cd $DIR_LARAVEL
-          ls -a
+          cd /germa/ci-cd-test-laravel
+          chmod +x script.sh
+          ./script.sh
