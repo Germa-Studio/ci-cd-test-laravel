@@ -22,4 +22,4 @@ jobs:
         script: | 
           echo $DIR_LARAVEL
           cd $DIR_LARAVEL
-          ./script.sh
+          ls -a
