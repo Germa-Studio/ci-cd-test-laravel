@@ -15,4 +15,6 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         port: ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: whoami
+        script: | 
+          cd /germa/ci-cd-test-laravel
+          bash script.sh
